@@ -1,6 +1,7 @@
 import requests
 from datetime import datetime, timezone
 import logging
+import os
 
 from app.settings.creds import (
     USER_AGENT,
@@ -82,7 +83,8 @@ def insert_data_to_sqlite(session, new_posts) -> None:
 def main():
     subreddit = 'amiugly'
     db_filename = 'user_images.db'
-    local_db_path = 'app/data/user_images.db'
+    local_db_path = os.path.join('app', 'data', db_filename)
+
     headers = set_request_headers(USER_AGENT)
 
     response = get_subreddit_response(subreddit, headers)
@@ -91,11 +93,10 @@ def main():
 
     with S3DatabaseHandler(BUCKET_NAME, db_filename) as s3:
         s3.download_db(local_db_path)
-
         with DBConnectionHandler() as db_handler:
             new_posts = find_new_data(db_handler, images)
             if new_posts:
-                insert_data_to_sqlite(db_handler, images)
+                insert_data_to_sqlite(db_handler, new_posts)
                 s3.upload_db(local_db_path)
             else:
                 logging.info("No new posts found, skipping S3 upload.")
