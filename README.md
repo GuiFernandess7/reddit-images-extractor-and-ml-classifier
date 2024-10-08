@@ -14,7 +14,7 @@ Overall, this project not only showcases the integration of various tools and te
 
 ## Tools
 
-<img src="https://github.com/user-attachments/assets/a9dd9bf5-1498-4229-8df4-f6d97360a2ed" alt="Jupyter" width="100"/>
-<img src="https://github.com/user-attachments/assets/29a2dbdd-26d5-46d1-95dd-639738cbeadc" alt="SQLite" width="100"/>
-<img src="https://github.com/user-attachments/assets/505b5fde-3343-4096-9b7d-fd9b1bc5f146" alt="SQLAlchemy" width="100"/>
+<img src="https://github.com/user-attachments/assets/a9dd9bf5-1498-4229-8df4-f6d97360a2ed" alt="Jupyter" width="100" style="margin-right: 20px;"/>
+<img src="https://github.com/user-attachments/assets/29a2dbdd-26d5-46d1-95dd-639738cbeadc" alt="SQLite" width="100" style="margin-right: 20px;"/>
+<img src="https://github.com/user-attachments/assets/505b5fde-3343-4096-9b7d-fd9b1bc5f146" alt="SQLAlchemy" width="100" style="margin-right: 20px;"/>
 <img src="https://github.com/user-attachments/assets/fe8212df-d398-4073-8268-4fd6a7dea83e" alt="AWS" width="100"/>
