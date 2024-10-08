@@ -14,9 +14,9 @@ Overall, this project not only showcases the integration of various tools and te
 
 ## Tools
 
-<img src="https://github.com/user-attachments/assets/cbe55116-f761-41d7-ba32-52dcb426d7de" alt="python" width="100"/>
-<img src="https://github.com/user-attachments/assets/a9dd9bf5-1498-4229-8df4-f6d97360a2ed" alt="Jupyter" width="100" style="margin-right: 50px;"/>
-<img src="https://github.com/user-attachments/assets/29a2dbdd-26d5-46d1-95dd-639738cbeadc" alt="SQLite" width="100" style="margin-right: 50px;"/>
-<img src="https://github.com/user-attachments/assets/505b5fde-3343-4096-9b7d-fd9b1bc5f146" alt="SQLAlchemy" width="100" style="margin-right: 50px;"/>
-<img src="https://github.com/user-attachments/assets/fe8212df-d398-4073-8268-4fd6a7dea83e" alt="AWS" width="100"/>
-<img src="https://github.com/user-attachments/assets/4c034feb-4da7-4edb-8b28-d966d25d0163" alt="Bucket" width="100"/>
+<img src="https://github.com/user-attachments/assets/cbe55116-f761-41d7-ba32-52dcb426d7de" alt="python" width="60"/>
+<img src="https://github.com/user-attachments/assets/a9dd9bf5-1498-4229-8df4-f6d97360a2ed" alt="Jupyter" width="60" style="margin-right: 50px;"/>
+<img src="https://github.com/user-attachments/assets/29a2dbdd-26d5-46d1-95dd-639738cbeadc" alt="SQLite" width="60" style="margin-right: 50px;"/>
+<img src="https://github.com/user-attachments/assets/505b5fde-3343-4096-9b7d-fd9b1bc5f146" alt="SQLAlchemy" width="60" style="margin-right: 50px;"/>
+<img src="https://github.com/user-attachments/assets/fe8212df-d398-4073-8268-4fd6a7dea83e" alt="AWS" width="60"/>
+<img src="https://github.com/user-attachments/assets/4c034feb-4da7-4edb-8b28-d966d25d0163" alt="Bucket" width="60"/>
