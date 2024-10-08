@@ -88,6 +88,7 @@ def main():
 
     response = get_subreddit_response(subreddit, headers)
     images = extract_images_from_response(response)
+    logging.info(f"{len(images)} post images found.")
 
     """ with S3DatabaseHandler(BUCKET_NAME, db_filename) as s3:
         s3.download_db(local_db_path)
