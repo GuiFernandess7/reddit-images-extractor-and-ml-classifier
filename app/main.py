@@ -1,7 +1,6 @@
 import requests
 from datetime import datetime, timezone
 import logging
-import os
 
 from app.settings.creds import (
     USER_AGENT,
@@ -90,7 +89,7 @@ def main():
     images = extract_images_from_response(response)
     logging.info(f"{len(images)} post images found.")
 
-    """ with S3DatabaseHandler(BUCKET_NAME, db_filename) as s3:
+    with S3DatabaseHandler(BUCKET_NAME, db_filename) as s3:
         s3.download_db(local_db_path)
 
         with DBConnectionHandler() as db_handler:
@@ -99,7 +98,7 @@ def main():
                 insert_data_to_sqlite(db_handler, images)
                 s3.upload_db(local_db_path)
             else:
-                logging.info("No new posts found, skipping S3 upload.") """
+                logging.info("No new posts found, skipping S3 upload.")
 
 if __name__ == '__main__':
     logging.basicConfig(
