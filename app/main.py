@@ -80,25 +80,19 @@ def insert_data_to_sqlite(session, new_posts) -> None:
         session.rollback()
         raise DatabaseInsertError(f"[DatabaseInsertError]: {e}") from e
 
-def main():
-    subreddit = 'amiugly'
-    db_filename = 'user_images.db'
-    local_db_path = os.path.join('app', 'data', db_filename)
-
+def create_db_folder_if_not_exists(local_db_path):
+    """Creates the db_folder."""
     try:
         os.makedirs(os.path.join('app', 'data'), exist_ok=True)
         logging.info(f"'{local_db_path}' created successfully")
     except Exception as e:
         logging.info(f"Error in creating directory: {e}")
 
-    headers = set_request_headers(USER_AGENT)
-
-    response = get_subreddit_response(subreddit, headers)
-    images = extract_images_from_response(response)
-    logging.info(f"{len(images)} post images found.")
-
+def send_to_bucket(db_filename, local_db_path, images):
+    """Updates the database and sends to amazon bucket."""
     with S3DatabaseHandler(BUCKET_NAME, db_filename) as s3:
         s3.download_db(local_db_path)
+
         with DBConnectionHandler() as db_handler:
             new_posts = find_new_data(db_handler, images)
             if new_posts:
@@ -106,6 +100,20 @@ def main():
                 s3.upload_db(local_db_path)
             else:
                 logging.info("No new posts found, skipping S3 upload.")
+
+def main():
+    subreddit = 'amiugly'
+    db_filename = 'user_images.db'
+    local_db_path = os.path.join('app', 'data', db_filename)
+
+    create_db_folder_if_not_exists(local_db_path)
+    headers = set_request_headers(USER_AGENT)
+
+    response = get_subreddit_response(subreddit, headers)
+    images = extract_images_from_response(response)
+    logging.info(f"{len(images)} post images found.")
+
+    send_to_bucket(db_filename, local_db_path, images)
 
 if __name__ == '__main__':
     logging.basicConfig(
