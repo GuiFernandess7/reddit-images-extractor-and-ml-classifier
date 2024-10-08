@@ -86,7 +86,7 @@ def main():
     local_db_path = os.path.join('app', 'data', db_filename)
 
     try:
-        os.makedirs(local_db_path, exist_ok=True)
+        os.makedirs(os.path.join('app', 'data'), exist_ok=True)
         logging.info(f"'{local_db_path}' created successfully")
     except Exception as e:
         logging.info(f"Ocorreu um erro ao criar o diretório: {e}")
