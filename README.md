@@ -1,4 +1,4 @@
-![Jupyter](https://github.com/user-attachments/assets/f8733152-4793-4a54-9598-d2b6bf1cd63f)# Reddit User Image Extractor
+# Reddit User Image Extractor
 
 ![reddit-banner-image](https://github.com/user-attachments/assets/33a3a7ff-51c4-41a1-9799-7bf8c7437aa3)
 
@@ -14,7 +14,7 @@ Overall, this project not only showcases the integration of various tools and te
 
 ## Tools
 
-![Jupyter](https://github.com/user-attachments/assets/a9dd9bf5-1498-4229-8df4-f6d97360a2ed)
-![SQLite](https://github.com/user-attachments/assets/29a2dbdd-26d5-46d1-95dd-639738cbeadc)
-![SQLAlchemy](https://github.com/user-attachments/assets/505b5fde-3343-4096-9b7d-fd9b1bc5f146)
-![AWS](https://github.com/user-attachments/assets/fe8212df-d398-4073-8268-4fd6a7dea83e)
+<img src="https://github.com/user-attachments/assets/a9dd9bf5-1498-4229-8df4-f6d97360a2ed" alt="Jupyter" width="200"/>
+<img src="https://github.com/user-attachments/assets/29a2dbdd-26d5-46d1-95dd-639738cbeadc" alt="SQLite" width="200"/>
+<img src="https://github.com/user-attachments/assets/505b5fde-3343-4096-9b7d-fd9b1bc5f146" alt="SQLAlchemy" width="200"/>
+<img src="https://github.com/user-attachments/assets/fe8212df-d398-4073-8268-4fd6a7dea83e" alt="AWS" width="200"/>
