@@ -85,6 +85,12 @@ def main():
     db_filename = 'user_images.db'
     local_db_path = os.path.join('app', 'data', db_filename)
 
+    try:
+        os.makedirs(local_db_path, exist_ok=True)
+        logging.info(f"O diretório '{local_db_path}' foi criado ou já existe.")
+    except Exception as e:
+        logging.info(f"Ocorreu um erro ao criar o diretório: {e}")
+
     headers = set_request_headers(USER_AGENT)
 
     response = get_subreddit_response(subreddit, headers)
