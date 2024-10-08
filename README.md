@@ -1,5 +1,7 @@
 # Reddit User Image Extractor
 
+![reddit-banner-image](https://github.com/user-attachments/assets/33a3a7ff-51c4-41a1-9799-7bf8c7437aa3)
+
 ## Introduction
 
 The Reddit User Image Extractor effectively harnesses ELT processes to gather and store user images from the 'amiugly' subreddit. By utilizing the Reddit API, SQLAlchemy, SQLite, and Amazon S3, this application provides a foundation for future machine learning and data processing tasks.
