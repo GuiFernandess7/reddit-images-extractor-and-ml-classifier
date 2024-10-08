@@ -87,7 +87,7 @@ def main():
 
     try:
         os.makedirs(local_db_path, exist_ok=True)
-        logging.info(f"O diretório '{local_db_path}' foi criado ou já existe.")
+        logging.info(f"'{local_db_path}' created successfully")
     except Exception as e:
         logging.info(f"Ocorreu um erro ao criar o diretório: {e}")
 
