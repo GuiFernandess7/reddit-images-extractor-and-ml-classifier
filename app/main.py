@@ -113,7 +113,7 @@ def main():
     images = extract_images_from_response(response)
     logging.info(f"{len(images)} post images found.")
 
-    #send_to_bucket(db_filename, local_db_path, images)
+    send_to_bucket(db_filename, local_db_path, images)
 
 if __name__ == '__main__':
     logging.basicConfig(
