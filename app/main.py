@@ -101,11 +101,11 @@ def send_to_bucket(db_filename, local_db_path, images, subreddit: str = None):
                     insert_data_to_sqlite(db_handler, new_posts)
                     s3.upload_db(local_db_path)
                 else:
-                    logging.info("No new posts found, skipping S3 upload.")
+                    logging.info(f"[{subreddit.upper()}] - No new posts found, skipping S3 upload.")
     except Exception as e:
-        logging.error(f"Error in sending to bucket: {e}")
+        logging.error(f"[{subreddit.upper()}] - Error in sending to bucket: {e}")
     else:
-        logging.info(f"Data sent successfully. Subreddit: {subreddit}.")
+        logging.info(f"[{subreddit.upper()}] Data sent successfully.")
 
 def main():
     subreddits = ['amiugly', 'truerateme']
@@ -118,7 +118,7 @@ def main():
     for sub in subreddits:
         response = get_subreddit_response(sub, headers)
         images = extract_images_from_response(response, sub)
-        logging.info(f"{len(images)} post images found for sub {sub}")
+        logging.info(f"[{sub.upper()}] - {len(images)} post images found.")
         send_to_bucket(db_filename, local_db_path, images, sub)
 
 if __name__ == '__main__':
