@@ -89,23 +89,20 @@ def create_db_folder_if_not_exists(local_db_path):
     except Exception as e:
         logging.info(f"Error in creating directory: {e}")
 
-def send_to_bucket(db_filename, local_db_path, images, subreddit: str = None):
-    """Updates the database and sends to amazon bucket."""
+def send_to_bucket(s3, local_db_path, images, subreddit: str = None):
+    """Updates the database and sends to Amazon bucket."""
     try:
-        with S3DatabaseHandler(BUCKET_NAME, db_filename) as s3:
-            s3.download_db(local_db_path)
-
-            with DBConnectionHandler() as db_handler:
-                new_posts = find_new_data(db_handler, images)
-                if new_posts:
-                    insert_data_to_sqlite(db_handler, new_posts)
-                    s3.upload_db(local_db_path)
-                else:
-                    logging.info(f"[{subreddit.upper()}] - No new posts found, skipping S3 upload.")
+        with DBConnectionHandler() as db_handler:
+            new_posts = find_new_data(db_handler, images)
+            if new_posts:
+                insert_data_to_sqlite(db_handler, new_posts)
+                s3.upload_db(local_db_path)
+                logging.info(f"[{subreddit.upper()}] Data sent successfully.")
+            else:
+                logging.info(f"[{subreddit.upper()}] - No new posts found, skipping S3 upload.")
     except Exception as e:
         logging.error(f"[{subreddit.upper()}] - Error in sending to bucket: {e}")
-    else:
-        logging.info(f"[{subreddit.upper()}] Data sent successfully.")
+
 
 def main():
     subreddits = ['amiugly', 'truerateme']
@@ -115,11 +112,14 @@ def main():
     create_db_folder_if_not_exists(local_db_path)
     headers = set_request_headers(USER_AGENT)
 
-    for sub in subreddits:
-        response = get_subreddit_response(sub, headers)
-        images = extract_images_from_response(response, sub)
-        logging.info(f"[{sub.upper()}] - {len(images)} post images found.")
-        send_to_bucket(db_filename, local_db_path, images, sub)
+    with S3DatabaseHandler(BUCKET_NAME, db_filename) as s3:
+        s3.download_db(local_db_path)
+
+        for sub in subreddits:
+            response = get_subreddit_response(sub, headers)
+            images = extract_images_from_response(response, sub)
+            logging.info(f"[{sub.upper()}] - {len(images)} post images found.")
+            send_to_bucket(s3, local_db_path, images, sub)
 
 if __name__ == '__main__':
     logging.basicConfig(
