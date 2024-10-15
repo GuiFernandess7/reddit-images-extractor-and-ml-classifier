@@ -37,7 +37,7 @@ def get_subreddit_response(subreddit, headers):
 
     return response.json()
 
-def extract_images_from_response(response) -> list:
+def extract_images_from_response(response, subreddit: str = None) -> list:
     """Extract the images urls from the api response"""
     gallery_items = response['data']['children']
     imgs_link = []
@@ -55,7 +55,8 @@ def extract_images_from_response(response) -> list:
                 ts=created_ts,
                 image_url=img_url,
                 created_at=created_date,
-                sex=None
+                sex=None,
+                subreddit=subreddit
                 )
             )
 
@@ -88,34 +89,37 @@ def create_db_folder_if_not_exists(local_db_path):
     except Exception as e:
         logging.info(f"Error in creating directory: {e}")
 
-def send_to_bucket(db_filename, local_db_path, images):
+def send_to_bucket(db_filename, local_db_path, images, subreddit: str = None):
     """Updates the database and sends to amazon bucket."""
-    with S3DatabaseHandler(BUCKET_NAME, db_filename) as s3:
-        s3.download_db(local_db_path)
+    try:
+        with S3DatabaseHandler(BUCKET_NAME, db_filename) as s3:
+            s3.download_db(local_db_path)
 
-        with DBConnectionHandler() as db_handler:
-            new_posts = find_new_data(db_handler, images)
-            if new_posts:
-                insert_data_to_sqlite(db_handler, new_posts)
-                s3.upload_db(local_db_path)
-            else:
-                logging.info("No new posts found, skipping S3 upload.")
+            with DBConnectionHandler() as db_handler:
+                new_posts = find_new_data(db_handler, images)
+                if new_posts:
+                    insert_data_to_sqlite(db_handler, new_posts)
+                    s3.upload_db(local_db_path)
+                else:
+                    logging.info("No new posts found, skipping S3 upload.")
+    except Exception as e:
+        logging.error(f"Error in sending to bucket: {e}")
+    else:
+        logging.info(f"Data sent successfully. Subreddit: {subreddit}.")
 
 def main():
-    subreddit = 'truerateme' #'''amiugly'
+    subreddits = ['amiugly', 'truerateme']
     db_filename = 'user_images.db'
     local_db_path = os.path.join('app', 'data', db_filename)
 
     create_db_folder_if_not_exists(local_db_path)
     headers = set_request_headers(USER_AGENT)
 
-    response = get_subreddit_response(subreddit, headers)
-
-    images = extract_images_from_response(response)
-    print(images)
-    logging.info(f"{len(images)} post images found.")
-
-    #send_to_bucket(db_filename, local_db_path, images)
+    for sub in subreddits:
+        response = get_subreddit_response(sub, headers)
+        images = extract_images_from_response(response, sub)
+        logging.info(f"{len(images)} post images found for sub {sub}")
+        send_to_bucket(db_filename, local_db_path, images, sub)
 
 if __name__ == '__main__':
     logging.basicConfig(
