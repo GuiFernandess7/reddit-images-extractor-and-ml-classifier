@@ -102,7 +102,7 @@ def send_to_bucket(db_filename, local_db_path, images):
                 logging.info("No new posts found, skipping S3 upload.")
 
 def main():
-    subreddit = 'amiugly'
+    subreddit = 'truerateme' #'''amiugly'
     db_filename = 'user_images.db'
     local_db_path = os.path.join('app', 'data', db_filename)
 
@@ -110,10 +110,12 @@ def main():
     headers = set_request_headers(USER_AGENT)
 
     response = get_subreddit_response(subreddit, headers)
+
     images = extract_images_from_response(response)
+    print(images)
     logging.info(f"{len(images)} post images found.")
 
-    send_to_bucket(db_filename, local_db_path, images)
+    #send_to_bucket(db_filename, local_db_path, images)
 
 if __name__ == '__main__':
     logging.basicConfig(
