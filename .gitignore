@@ -3,3 +3,4 @@ app/data/*
 .env
 __pycache__
 notebooks/imgs
+.vscode
