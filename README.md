@@ -1,6 +1,6 @@
 # Reddit User Image Extractor
 
-<img width="841" alt="diagram" src="https://github.com/user-attachments/assets/26834f77-e094-4968-b138-5c7f207ba6c1">
+![reddit-banner-image](https://github.com/user-attachments/assets/33a3a7ff-51c4-41a1-9799-7bf8c7437aa3)
 
 ## Introduction
 
@@ -12,7 +12,6 @@ One potential application of the collected data is to develop a classification m
 
 Overall, this project not only showcases the integration of various tools and technologies but also highlights the potential for further exploration in image classification and data analysis.
 
-![reddit-banner-image](https://github.com/user-attachments/assets/33a3a7ff-51c4-41a1-9799-7bf8c7437aa3)
 
 ## Tools
 
