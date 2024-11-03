@@ -12,6 +12,19 @@ One potential application of the collected data is to develop a classification m
 
 Overall, this project not only showcases the integration of various tools and technologies but also highlights the potential for further exploration in image classification and data analysis.
 
+## ELT Process
+
+1. **Reddit API (Image Data Collection)**: The initial collection of image URLs is performed through the Reddit API. Metadata, including image URLs, is stored in an SQLite database, which includes a column named `img_url` to hold the image addresses.
+
+2. **Python Application (URL Extraction and Storage)**: A Python script processes the extracted URLs and stores the initial data in an SQLite database hosted on Amazon S3. This database serves as a central repository for the image data, allowing easy updates and labeling.
+
+3. **DBeaver (Data Labeling)**: In DBeaver, I review and label each image as either `M` (Male) or `F` (Female). For images that no longer exist, you can leave the URL as `NULL`, which prevents unnecessary downloads. After labeling, a Python script updates the SQLite file on S3 with the new labels.
+
+4. **Google Colab (Image Download)**: In Colab, the image download process begins by reading the updated SQLite database and filtering only valid URLs (non-NULL values). The script then downloads the images as JPG files and stores them on Google Drive, ensuring that only accessible images are considered for training and inference.
+
+5. **Inference in Colab (Gender Classification)**: During the inference phase, the model uses the images stored in Google Drive and associates each image with its respective label (`M` or `F`) by matching the image `id` with the database records. This association allows the model to classify the images based on the pre-assigned labels in the SQLite database.
+
+This two-step validation process — first in DBeaver and later in Colab — ensures that only relevant and accessible image URLs are processed and labeled, optimizing the dataset and model performance. 
 
 ## Tools
 
