@@ -14,6 +14,8 @@ This project not only showcases the integration of various tools and technologie
 
 ## ELT Process
 
+![Untitled-2024-11-02-2027](https://github.com/user-attachments/assets/86155e77-5a89-4d38-b4a7-dbda9b122c48)
+
 1. **Reddit API (Image Data Collection)**: The initial collection of image URLs is performed through the Reddit API. Metadata, including image URLs, is stored in an SQLite database, which includes a column named `img_url` to hold the image addresses.
 
 2. **Python Application (URL Extraction and Storage)**: A Python script processes the extracted URLs and stores the initial data in an SQLite database hosted on Amazon S3. This database serves as a central repository for the image data, allowing easy updates and labeling.
