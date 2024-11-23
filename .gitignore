@@ -4,3 +4,4 @@ app/data/*
 __pycache__
 notebooks/imgs
 .vscode
+Pipfile.lock
