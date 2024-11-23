@@ -103,9 +103,8 @@ def send_to_bucket(s3, local_db_path, images, subreddit: str = None):
     except Exception as e:
         logging.error(f"[{subreddit.upper()}] - Error in sending to bucket: {e}")
 
-
 def main():
-    subreddits = ['amiugly', 'truerateme']
+    subreddits = ['truerateme', 'rateme'] #amiugly
     db_filename = 'user_images.db'
     local_db_path = os.path.join('app', 'data', db_filename)
 
