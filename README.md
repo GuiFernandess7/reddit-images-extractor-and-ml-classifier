@@ -26,7 +26,7 @@ This project not only showcases the integration of various tools and technologie
 
 5. **Inference in Colab (Gender Classification)**: During the inference phase, the model uses the images stored in Google Drive and associates each image with its respective label (`M` or `F`) by matching the image `id` with the database records. This association allows the model to classify the images based on the pre-assigned labels in the SQLite database.
 
-This two-step validation process — first in DBeaver and later in Colab — ensures that only relevant and accessible image URLs are processed and labeled, optimizing the dataset and model performance. 
+This two-step validation process — first in DBeaver and later in Colab — ensures that only relevant and accessible image URLs are processed and labeled, optimizing the dataset and model performance.
 
 ## Tools
 
