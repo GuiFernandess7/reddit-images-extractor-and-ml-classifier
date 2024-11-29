@@ -36,5 +36,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           DB_FILE_KEY: ${{ secrets.DB_FILE_KEY }}
           LOCAL_DB_PATH: ${{ secrets.LOCAL_DB_PATH }}
+          SUBREDDITS: ${{ secrets.SUBREDDITS }}
         run: |
           python -m app.main
