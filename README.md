@@ -4,11 +4,11 @@
 
 ## Introduction
 
-The Reddit User Image Extractor effectively harnesses ELT processes to gather and store user images from the **amiugly** subreddit. By utilizing the Reddit API, SQLAlchemy, SQLite, and Amazon S3, this application provides a foundation for future machine learning and data processing tasks.
+The Reddit User Image Extractor effectively harnesses ELT processes to gather and store images from the subreddits. By utilizing the Reddit API, SQLAlchemy, SQLite, and Amazon S3, this application provides a foundation for future machine learning and data processing tasks.
 
-The data collection process is automated on a daily basis using GitHub Actions, ensuring that the database remains up-to-date with the latest user images. This seamless integration of automation not only saves time but also enhances the consistency and reliability of the database.
+The data collection process is automated on a daily basis using GitHub Actions, ensuring that the database remains up-to-date with the latest images. This seamless integration of automation not only saves time but also enhances the consistency and reliability of the database.
 
-One potential application of the collected data is to develop a classification model that predicts the gender of individuals in the images. By training a machine learning algorithm on a labeled dataset, the model could analyze visual features to make accurate predictions about the gender of the person in a given photo. This capability could enhance various applications, such as targeted marketing or user profiling in social media platforms.
+One potential application of the collected data is to develop a classification model. By training a machine learning algorithm on a labeled dataset, the model could analyze visual features to make accurate predictions. This capability could enhance various applications, such as targeted marketing or user profiling in social media platforms.
 
 This project not only showcases the integration of various tools and technologies but also highlights the potential for further exploration in image classification and data analysis.
 
@@ -20,7 +20,7 @@ This project not only showcases the integration of various tools and technologie
 
 2. **Python Application (URL Extraction and Storage)**: A Python script processes the extracted URLs and stores the initial data in an SQLite database hosted on Amazon S3. This database serves as a central repository for the image data, allowing easy updates and labeling.
 
-3. **DBeaver (Data Labeling)**: In DBeaver, I review and label each image as either `M` (Male) or `F` (Female). For images that no longer exist, you can leave the URL as `NULL`, which prevents unnecessary downloads. After labeling, a Python script updates the SQLite file on S3 with the new labels.
+3. **DBeaver (Data Labeling)**: In DBeaver, I review and label each image. For images that no longer exist, you can leave the URL as `NULL`, which prevents unnecessary downloads. After labeling, a Python script updates the SQLite file on S3 with the new labels.
 
 4. **Google Colab (Image Download)**: In Colab, the image download process begins by reading the updated SQLite database and filtering only valid URLs (non-NULL values). The script then downloads the images as JPG files and stores them on Google Drive, ensuring that only accessible images are considered for training and inference.
 
