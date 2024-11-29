@@ -7,6 +7,7 @@ from app.settings.creds import (
     USER_AGENT,
     INITIAL_PARAMS,
     BUCKET_NAME,
+    SUBREDDITS
 )
 
 from app.errors.errors import *
@@ -104,12 +105,10 @@ def send_to_bucket(s3, local_db_path, images, subreddit: str = None):
         logging.error(f"[{subreddit.upper()}] - Error in sending to bucket: {e}")
 
 def main():
-    subreddits_str = os.getenv('SUBREDDITS')
-    if subreddits_str is None:
+    if SUBREDDITS is None:
         logging.error(f"Subreddits env variable not found.")
     else:
-        subreddits = subreddits_str.split(',') if subreddits_str else []
-        subreddits = ['truerateme', 'rateme', 'amiugly', 'MakeupAddiction']
+        subreddits = SUBREDDITS.split(',')
         db_filename = 'user_images.db'
         local_db_path = os.path.join('app', 'data', db_filename)
 
