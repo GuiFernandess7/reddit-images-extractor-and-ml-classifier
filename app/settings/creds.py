@@ -10,6 +10,7 @@ USER_AGENT = os.getenv('USER_AGENT')
 BUCKET_NAME = 'reddit-images-bucket'
 DB_FILE_KEY = 'user_images.db'
 LOCAL_DB_PATH = 'app/data/user_images.db'
+SUBREDDITS=os.getenv('SUBREDDITS')
 
 INITIAL_PARAMS = {
     'grant_type': 'password',
