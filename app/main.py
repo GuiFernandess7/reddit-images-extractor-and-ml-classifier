@@ -104,21 +104,26 @@ def send_to_bucket(s3, local_db_path, images, subreddit: str = None):
         logging.error(f"[{subreddit.upper()}] - Error in sending to bucket: {e}")
 
 def main():
-    subreddits = ['truerateme', 'rateme', 'amiugly', 'MakeupAddiction']
-    db_filename = 'user_images.db'
-    local_db_path = os.path.join('app', 'data', db_filename)
+    subreddits_str = os.getenv('SUBREDDITS')
+    if subreddits_str is None:
+        logging.error(f"Subreddits env variable not found.")
+    else:
+        subreddits = subreddits_str.split(',') if subreddits_str else []
+        subreddits = ['truerateme', 'rateme', 'amiugly', 'MakeupAddiction']
+        db_filename = 'user_images.db'
+        local_db_path = os.path.join('app', 'data', db_filename)
 
-    create_db_folder_if_not_exists(local_db_path)
-    headers = set_request_headers(USER_AGENT)
+        create_db_folder_if_not_exists(local_db_path)
+        headers = set_request_headers(USER_AGENT)
 
-    with S3DatabaseHandler(BUCKET_NAME, db_filename) as s3:
-        s3.download_db(local_db_path)
+        with S3DatabaseHandler(BUCKET_NAME, db_filename) as s3:
+            s3.download_db(local_db_path)
 
-        for sub in subreddits:
-            response = get_subreddit_response(sub, headers)
-            images = extract_images_from_response(response, sub)
-            logging.info(f"[{sub.upper()}] - {len(images)} post images found.")
-            send_to_bucket(s3, local_db_path, images, sub)
+            for sub in subreddits:
+                response = get_subreddit_response(sub, headers)
+                images = extract_images_from_response(response, sub)
+                logging.info(f"[{sub.upper()}] - {len(images)} post images found.")
+                send_to_bucket(s3, local_db_path, images, sub)
 
 if __name__ == '__main__':
     logging.basicConfig(
