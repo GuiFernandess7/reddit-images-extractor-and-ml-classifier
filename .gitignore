@@ -6,3 +6,4 @@ notebooks/imgs
 .vscode
 Pipfile.lock
 .github/*
+.creds

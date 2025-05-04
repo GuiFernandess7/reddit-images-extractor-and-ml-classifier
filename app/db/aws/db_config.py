@@ -1,9 +1,10 @@
 import boto3
 import logging
 
+
 class S3DatabaseHandler:
     def __init__(self, bucket_name, db_file_key):
-        self.s3 = boto3.client('s3')
+        self.s3 = boto3.client("s3")
         self.bucket_name = bucket_name
         self.db_file_key = db_file_key
 
