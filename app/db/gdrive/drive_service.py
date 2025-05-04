@@ -57,7 +57,7 @@ class GoogleDriveAuth(GoogleDriveInterface):
         try:
             # service_account_info = json.loads(os.getenv("GCP_SERVICE_ACCOUNT_JSON"))
 
-            creds = service_account.Credentials.from_service_account_info(
+            creds = service_account.Credentials.from_service_account_file(
                 "service_account.json", scopes=self.scopes
             )
             self.drive_service = build("drive", "v3", credentials=creds)
