@@ -5,4 +5,5 @@ __pycache__
 notebooks/imgs
 .vscode
 Pipfile.lock
+app/db/gdrive/.creds
 .creds

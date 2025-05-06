@@ -53,13 +53,19 @@ class GoogleDriveAuth(GoogleDriveInterface):
         self.scopes = scopes
         self.drive_service = None
 
-    def authenticate(self):
+    def authenticate(self, local: bool = False):
         try:
-            # service_account_info = json.loads(os.getenv("GCP_SERVICE_ACCOUNT_JSON"))
-
-            creds = service_account.Credentials.from_service_account_file(
-                "service_account.json", scopes=self.scopes
-            )
+            if local:
+                service_account_file = os.path.join(
+                    CURRENT_DIR, ".creds", "service_account.json"
+                )
+                creds = service_account.Credentials.from_service_account_file(
+                    service_account_file, scopes=self.scopes
+                )
+            else:
+                creds = service_account.Credentials.from_service_account_file(
+                    "service_account.json", scopes=self.scopes
+                )
             self.drive_service = build("drive", "v3", credentials=creds)
             logger.info("Google Drive service authenticated successfully.")
         except Exception as e:

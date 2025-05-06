@@ -2,6 +2,9 @@ import requests
 from datetime import datetime, timezone
 import logging
 import os
+from dotenv import load_dotenv
+
+load_dotenv(override=True)
 
 from app.settings.creds import USER_AGENT, INITIAL_PARAMS, SUBREDDITS, GDRIVE_FOLDER_ID
 
@@ -130,7 +133,7 @@ def main():
         headers = set_request_headers(USER_AGENT)
 
         gdrive = GoogleDriveAuth(scopes=["https://www.googleapis.com/auth/drive"])
-        gdrive.authenticate()
+        gdrive.authenticate(local=False)
         db_file_handler = FileUploader(gdrive)
         db_file_handler.download(
             DB_FILENAME,
